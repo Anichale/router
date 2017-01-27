@@ -243,6 +243,9 @@ http {
 			{{end}}
 
 			{{ if $appConfig.Maintenance }}return 503;{{ else if $appConfig.Available }}proxy_buffering off;
+			proxy_buffers {{ $appConfig.ProxyBuffers }};
+	    proxy_buffer_size {{ $appConfig.ProxyBufferSize }};
+    	proxy_busy_buffers_size {{ $appConfig.ProxyBusyBuffersSize }};
 			proxy_set_header Host $host;
 			proxy_set_header X-Forwarded-For $remote_addr;
 			proxy_set_header X-Forwarded-Proto $access_scheme;
