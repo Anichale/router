@@ -231,6 +231,30 @@ func TestValidAppTCPTimeout(t *testing.T) {
 	testValidValues(t, newTestAppConfig, "TCPTimeout", "tcpTimeout", []string{"1", "2", "10", "1ms", "2s", "10m"})
 }
 
+func TestInvalidAppProxyBuffers(t *testing.T) {
+	testInvalidValues(t, newTestAppConfig, "ProxyBuffers", "proxyBuffers", []string{"0", "-1", "foobar", "256k", "1m"})
+}
+
+func TestValidAppProxyBuffers(t *testing.T) {
+	testValidValues(t, newTestAppConfig, "ProxyBuffers", "proxyBuffers", []string{"4 1", "4 20", "8 4|20", "8 4k|8k", "4 256K", "8 1m", "4 1M|4M"})
+}
+
+func TestInvalidAppProxyBufferSize(t *testing.T) {
+	testInvalidValues(t, newTestAppConfig, "ProxyBufferSize", "proxyBufferSize", []string{"0", "-1", "foobar", "4 4k"})
+}
+
+func TestValidAppProxyBufferSize(t *testing.T) {
+	testValidValues(t, newTestAppConfig, "ProxyBufferSize", "proxyBufferSize", []string{"1", "1|2", "20", "1k", "128k|256k", "512K|1m", "8m", "1M"})
+}
+
+func TestInvalidAppProxyBusyBuffersSize(t *testing.T) {
+	testInvalidValues(t, newTestAppConfig, "ProxyBusyBuffersSize", "proxyBusyBuffersSize", []string{"0", "-1", "foobar"})
+}
+
+func TestValidAppProxyBusyBuffersSize(t *testing.T) {
+	testValidValues(t, newTestAppConfig, "ProxyBusyBuffersSize", "proxyBusyBuffersSize", []string{"1", "1|2", "20", "1k", "128k|256k", "512K|1m", "8m", "1M"})
+}
+
 func TestInvalidCertMappings(t *testing.T) {
 	testInvalidValues(t, newTestAppConfig, "CertMappings", "certificates", []string{"0", "-1", "foobar"})
 }
