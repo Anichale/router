@@ -236,7 +236,7 @@ func TestInvalidAppProxyBuffers(t *testing.T) {
 }
 
 func TestValidAppProxyBuffers(t *testing.T) {
-	testValidValues(t, newTestAppConfig, "ProxyBuffers", "proxyBuffers", []string{"4 1", "4 20", "8 4|20", "8 4k|8k", "4 256K", "8 1m", "4 1M|4M"})
+	testValidValues(t, newTestAppConfig, "ProxyBuffers", "proxyBuffers", []string{"4 1", "4 20", "8 8k", "4 256K", "8 1m", "4 4M"})
 }
 
 func TestInvalidAppProxyBufferSize(t *testing.T) {
@@ -244,15 +244,15 @@ func TestInvalidAppProxyBufferSize(t *testing.T) {
 }
 
 func TestValidAppProxyBufferSize(t *testing.T) {
-	testValidValues(t, newTestAppConfig, "ProxyBufferSize", "proxyBufferSize", []string{"1", "1|2", "20", "1k", "128k|256k", "512K|1m", "8m", "1M"})
+	testValidValues(t, newTestAppConfig, "ProxyBufferSize", "proxyBufferSize", []string{"1", "1|2", "20", "1k", "256K", "8m", "1M"})
 }
 
 func TestInvalidAppProxyBusyBuffersSize(t *testing.T) {
-	testInvalidValues(t, newTestAppConfig, "ProxyBusyBuffersSize", "proxyBusyBuffersSize", []string{"0", "-1", "foobar"})
+	testInvalidValues(t, newTestAppConfig, "ProxyBusyBuffersSize", "proxyBusyBuffersSize", []string{"0", "-1", "foobar", "4 4k"})
 }
 
 func TestValidAppProxyBusyBuffersSize(t *testing.T) {
-	testValidValues(t, newTestAppConfig, "ProxyBusyBuffersSize", "proxyBusyBuffersSize", []string{"1", "1|2", "20", "1k", "128k|256k", "512K|1m", "8m", "1M"})
+	testValidValues(t, newTestAppConfig, "ProxyBusyBuffersSize", "proxyBusyBuffersSize", []string{"1", "20", "1k", "256K", "8m", "1M"})
 }
 
 func TestInvalidCertMappings(t *testing.T) {

@@ -122,9 +122,9 @@ type AppConfig struct {
 	Whitelist      				[]string `key:"whitelist" constraint:"^((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))?(\\s*,\\s*)?)+$"`
 	ConnectTimeout 				string   `key:"connectTimeout" constraint:"^[1-9]\\d*(ms|[smhdwMy])?$"`
 	TCPTimeout     				string   `key:"tcpTimeout" constraint:"^[1-9]\\d*(ms|[smhdwMy])?$"`
-	ProxyBuffers 	  			string   `key:"proxyBuffers" constraint:"^[1-9]\\d*\\s([1-9]\\d*[kKmM]?)(\\|([1-9]\\d*[kKmM]?))?$"`
-	ProxyBufferSize 			string   `key:"proxyBufferSize" constraint:"^([1-9]\\d*[kKmM]?)(\\|([1-9]\\d*[kKmM]?))?$"`
-	ProxyBusyBuffersSize 	string   `key:"proxyBusyBuffersSize" constraint:"^([1-9]\\d*[kKmM]?)(\\|([1-9]\\d*[kKmM]?))?$"`
+	ProxyBuffers 	  			string   `key:"proxyBuffers" constraint:"^[1-9]\\d*\\s[1-9]\\d*[kKmM]?$"`
+	ProxyBufferSize 			string   `key:"proxyBufferSize" constraint:"^[1-9]\\d*[kKmM]?$"`
+	ProxyBusyBuffersSize 	string   `key:"proxyBusyBuffersSize" constraint:"^[1-9]\\d*[kKmM]?$"`
 	ServiceIP      				string
 	CertMappings   				map[string]string `key:"certificates" constraint:"(?i)^((([a-z0-9]+(-*[a-z0-9]+)*)|((\\*\\.)?[a-z0-9]+(-*[a-z0-9]+)*\\.)+[a-z0-9]+(-*[a-z0-9]+)+):([a-z0-9]+(-*[a-z0-9]+)*)(\\s*,\\s*)?)+$"`
 	Certificates   				map[string]*Certificate
@@ -137,9 +137,9 @@ func newAppConfig(routerConfig *RouterConfig) *AppConfig {
 	return &AppConfig{
 		ConnectTimeout:  			"30s",
 		TCPTimeout:      			routerConfig.DefaultTimeout,
-		ProxyBuffers: 	 			"8 4k|8k",
-		ProxyBufferSize: 			"4k|8k",
-		ProxyBusyBuffersSize: "8k|16k",
+		ProxyBuffers: 	 			"8 8k",
+		ProxyBufferSize: 			"8k",
+		ProxyBusyBuffersSize: "16k",
 		Certificates:   			make(map[string]*Certificate, 0),
 		SSLConfig:      			newSSLConfig(),
 	}
