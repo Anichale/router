@@ -244,7 +244,7 @@ func TestInvalidAppProxyBufferSize(t *testing.T) {
 }
 
 func TestValidAppProxyBufferSize(t *testing.T) {
-	testValidValues(t, newTestAppConfig, "ProxyBufferSize", "proxyBufferSize", []string{"1", "1|2", "20", "1k", "256K", "8m", "1M"})
+	testValidValues(t, newTestAppConfig, "ProxyBufferSize", "proxyBufferSize", []string{"1", "20", "1k", "256K", "8m", "1M"})
 }
 
 func TestInvalidAppProxyBusyBuffersSize(t *testing.T) {
